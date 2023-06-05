@@ -31,6 +31,10 @@ public class User implements UserDetails {
     @JoinColumn(name = "user_profile_details_id", referencedColumnName = "userProfileDetailsID")
     private UserProfileDetails userProfileDetails;
 
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "bank_account_id", referencedColumnName = "bankAccountID")
+    private BankAccount bankAccount;
+
     @Override
     public boolean isAccountNonExpired() {
         return true;
