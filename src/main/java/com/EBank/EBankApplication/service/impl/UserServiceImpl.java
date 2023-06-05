@@ -2,6 +2,7 @@ package com.EBank.EBankApplication.service.impl;
 
 import com.EBank.EBankApplication.entity.User;
 import com.EBank.EBankApplication.entity.UserProfileDetails;
+import com.EBank.EBankApplication.error.UserNotFoundException;
 import com.EBank.EBankApplication.model.ResponseMessage;
 import com.EBank.EBankApplication.model.UserProfileDetailsRequest;
 import com.EBank.EBankApplication.model.UserResponseModel;
@@ -28,10 +29,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseMessage createUserProfileDetails(Long userID, UserProfileDetailsRequest userProfileDetailsRequest) {
+    public ResponseMessage createUserProfileDetails(Long userID, UserProfileDetailsRequest userProfileDetailsRequest) throws UserNotFoundException {
         User user = userRepository
                 .findById(userID)
-                .orElseThrow(() -> new EntityNotFoundException("User not found!"));
+                .orElseThrow(() -> new UserNotFoundException("User not found!"));
 
         UserProfileDetails userProfileDetails = new UserProfileDetails();
         userProfileDetails.setUser(user);
@@ -48,10 +49,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResponseModel getUserByID(Long userID) {
+    public UserResponseModel getUserByID(Long userID) throws UserNotFoundException {
         User user = userRepository
                 .findById(userID)
-                .orElseThrow(() -> new EntityNotFoundException("User not found!"));
+                .orElseThrow(() -> new UserNotFoundException("User not found!"));
 
         UserProfileDetails userProfileDetails = user.getUserProfileDetails();
 

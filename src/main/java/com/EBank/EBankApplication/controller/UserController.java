@@ -1,5 +1,6 @@
 package com.EBank.EBankApplication.controller;
 
+import com.EBank.EBankApplication.error.UserNotFoundException;
 import com.EBank.EBankApplication.model.ResponseMessage;
 import com.EBank.EBankApplication.model.UserProfileDetailsRequest;
 import com.EBank.EBankApplication.model.UserResponseModel;
@@ -21,14 +22,14 @@ public class UserController {
     }
 
     @PostMapping("/create-profile-details/{userID}")
-    public ResponseEntity<ResponseMessage> createProfileDetails(@PathVariable Long userID, @RequestBody UserProfileDetailsRequest userProfileDetailsRequest) {
+    public ResponseEntity<ResponseMessage> createProfileDetails(@PathVariable Long userID, @RequestBody UserProfileDetailsRequest userProfileDetailsRequest) throws UserNotFoundException {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(userService.createUserProfileDetails(userID, userProfileDetailsRequest));
     }
 
     @GetMapping("/get-profile-details/{userID}")
-    public ResponseEntity<UserResponseModel> getProfileDetails(@PathVariable Long userID) {
+    public ResponseEntity<UserResponseModel> getProfileDetails(@PathVariable Long userID) throws UserNotFoundException {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(userService.getUserByID(userID));
