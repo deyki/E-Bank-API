@@ -3,6 +3,7 @@ package com.EBank.EBankApplication.service.impl;
 import com.EBank.EBankApplication.entity.BankAccount;
 import com.EBank.EBankApplication.entity.Transaction;
 import com.EBank.EBankApplication.enums.TransactionType;
+import com.EBank.EBankApplication.error.BanException;
 import com.EBank.EBankApplication.error.BankAccountBalanceException;
 import com.EBank.EBankApplication.error.BankAccountNotFoundException;
 import com.EBank.EBankApplication.model.ResponseMessage;
@@ -31,7 +32,21 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public ResponseMessage deposit(DepositRequest depositRequest) throws BankAccountNotFoundException {
+    public Boolean bankAccountBan(String iban) throws BankAccountNotFoundException {
+        BankAccount bankAccount = bankAccountRepository
+                .findByIban(iban)
+                .orElseThrow(() -> new BankAccountNotFoundException("Bank account not found!"));
+
+        return bankAccount.getBanned();
+    }
+
+    @Override
+    public ResponseMessage deposit(DepositRequest depositRequest) throws BankAccountNotFoundException, BanException {
+        Boolean banned = bankAccountBan(depositRequest.iban());
+        if (banned) {
+            throw new BanException("This bank account is banned!");
+        }
+
         BankAccount bankAccount = bankAccountRepository
                 .findByIban(depositRequest.iban())
                 .orElseThrow(() -> new BankAccountNotFoundException("Bank account not found!"));
@@ -52,7 +67,12 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public ResponseMessage withDraw(WithDrawRequest withDrawRequest) throws BankAccountNotFoundException, BankAccountBalanceException {
+    public ResponseMessage withDraw(WithDrawRequest withDrawRequest) throws BankAccountNotFoundException, BankAccountBalanceException, BanException {
+        Boolean banned = bankAccountBan(withDrawRequest.iban());
+        if (banned) {
+            throw new BanException("This bank account is banned!");
+        }
+
         BankAccount bankAccount = bankAccountRepository
                 .findByIban(withDrawRequest.iban())
                 .orElseThrow(() -> new BankAccountNotFoundException("Bank account not found!"));
@@ -77,7 +97,17 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public ResponseMessage transfer(TransferRequest transferRequest) throws BankAccountNotFoundException, BankAccountBalanceException {
+    public ResponseMessage transfer(TransferRequest transferRequest) throws BankAccountNotFoundException, BankAccountBalanceException, BanException {
+        Boolean senderAccountBanned = bankAccountBan(transferRequest.senderIban());
+        if (senderAccountBanned) {
+            throw new BanException("This bank account is banned!");
+        }
+
+        Boolean receiverAccountBanned = bankAccountBan(transferRequest.receiverIban());
+        if (receiverAccountBanned) {
+            throw new BanException("This bank account is banned!");
+        }
+
         BankAccount senderBankAccount = bankAccountRepository
                 .findByIban(transferRequest.senderIban())
                 .orElseThrow(() -> new BankAccountNotFoundException("Invalid sender iban!"));

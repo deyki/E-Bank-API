@@ -40,4 +40,9 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     public ProblemDetail bankAccountBalanceException(BankAccountBalanceException exception) {
         return ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, exception.getMessage());
     }
+
+    @ExceptionHandler(BanException.class)
+    public ProblemDetail banException(BanException exception) {
+        return ProblemDetail.forStatusAndDetail(HttpStatus.FORBIDDEN, exception.getMessage());
+    }
 }

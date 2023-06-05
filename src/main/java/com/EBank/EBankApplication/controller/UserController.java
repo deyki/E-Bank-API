@@ -2,8 +2,8 @@ package com.EBank.EBankApplication.controller;
 
 import com.EBank.EBankApplication.error.UserNotFoundException;
 import com.EBank.EBankApplication.model.ResponseMessage;
-import com.EBank.EBankApplication.model.UserProfileDetailsRequest;
-import com.EBank.EBankApplication.model.UserResponseModel;
+import com.EBank.EBankApplication.model.user.UserProfileDetailsRequest;
+import com.EBank.EBankApplication.model.user.UserResponseModel;
 import com.EBank.EBankApplication.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

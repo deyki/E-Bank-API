@@ -1,5 +1,6 @@
 package com.EBank.EBankApplication.controller;
 
+import com.EBank.EBankApplication.error.BanException;
 import com.EBank.EBankApplication.error.BankAccountBalanceException;
 import com.EBank.EBankApplication.error.BankAccountNotFoundException;
 import com.EBank.EBankApplication.model.ResponseMessage;
@@ -24,21 +25,21 @@ public class TransactionController {
     }
 
     @PostMapping("/deposit")
-    public ResponseEntity<ResponseMessage> deposit(@RequestBody DepositRequest depositRequest) throws BankAccountNotFoundException {
+    public ResponseEntity<ResponseMessage> deposit(@RequestBody DepositRequest depositRequest) throws BankAccountNotFoundException, BanException {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(transactionService.deposit(depositRequest));
     }
 
     @PostMapping("/withDraw")
-    public ResponseEntity<ResponseMessage> withDraw(@RequestBody WithDrawRequest withDrawRequest) throws BankAccountBalanceException, BankAccountNotFoundException {
+    public ResponseEntity<ResponseMessage> withDraw(@RequestBody WithDrawRequest withDrawRequest) throws BankAccountBalanceException, BankAccountNotFoundException, BanException {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(transactionService.withDraw(withDrawRequest));
     }
 
     @PostMapping("/transfer")
-    public ResponseEntity<ResponseMessage> transfer(@RequestBody TransferRequest transferRequest) throws BankAccountBalanceException, BankAccountNotFoundException {
+    public ResponseEntity<ResponseMessage> transfer(@RequestBody TransferRequest transferRequest) throws BankAccountBalanceException, BankAccountNotFoundException, BanException {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(transactionService.transfer(transferRequest));

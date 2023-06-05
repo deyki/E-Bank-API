@@ -2,8 +2,8 @@ package com.EBank.EBankApplication.service;
 
 import com.EBank.EBankApplication.error.BankAccountNotFoundException;
 import com.EBank.EBankApplication.error.UserNotFoundException;
-import com.EBank.EBankApplication.model.BankAccountRequest;
-import com.EBank.EBankApplication.model.BankAccountResponse;
+import com.EBank.EBankApplication.model.bankAccount.BankAccountRequest;
+import com.EBank.EBankApplication.model.bankAccount.BankAccountResponse;
 import com.EBank.EBankApplication.model.ResponseMessage;
 
 public interface BankAccountService {

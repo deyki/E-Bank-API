@@ -5,8 +5,8 @@ import com.EBank.EBankApplication.entity.User;
 import com.EBank.EBankApplication.error.AlreadyExistException;
 import com.EBank.EBankApplication.error.BankAccountNotFoundException;
 import com.EBank.EBankApplication.error.UserNotFoundException;
-import com.EBank.EBankApplication.model.BankAccountRequest;
-import com.EBank.EBankApplication.model.BankAccountResponse;
+import com.EBank.EBankApplication.model.bankAccount.BankAccountRequest;
+import com.EBank.EBankApplication.model.bankAccount.BankAccountResponse;
 import com.EBank.EBankApplication.model.ResponseMessage;
 import com.EBank.EBankApplication.repository.BankAccountRepository;
 import com.EBank.EBankApplication.repository.UserRepository;
@@ -56,6 +56,7 @@ public class BankAccountServiceImpl implements BankAccountService {
         bankAccount.setUser(user);
         bankAccount.setIban(bankAccountRequest.iban());
         bankAccount.setBalance(0.0f);
+        bankAccount.setBanned(false);
         bankAccountRepository.save(bankAccount);
 
         user.setBankAccount(bankAccount);
@@ -77,7 +78,8 @@ public class BankAccountServiceImpl implements BankAccountService {
         return new BankAccountResponse(
                 user.getUsername(),
                 bankAccount.getIban(),
-                bankAccount.getBalance()
+                bankAccount.getBalance(),
+                bankAccount.getBanned()
         );
     }
 }
