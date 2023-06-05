@@ -35,4 +35,9 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     public ProblemDetail alreadyExistException(AlreadyExistException exception) {
         return ProblemDetail.forStatusAndDetail(HttpStatus.FOUND, exception.getMessage());
     }
+
+    @ExceptionHandler(BankAccountBalanceException.class)
+    public ProblemDetail bankAccountBalanceException(BankAccountBalanceException exception) {
+        return ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, exception.getMessage());
+    }
 }
