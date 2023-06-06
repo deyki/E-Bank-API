@@ -45,10 +45,24 @@ public class TransactionController {
                 .body(transactionService.transfer(transferRequest));
     }
 
-    @GetMapping("/all")
-    public ResponseEntity<List<TransactionResponse>> getTransactionsByUsernameAndType(@RequestBody TransactionRequest transactionRequest) {
+    @GetMapping("/allDeposits")
+    public ResponseEntity<List<TransactionResponse>> getAllDeposits(@RequestBody TransactionRequest transactionRequest) {
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(transactionService.getTransactionsByTypeAndSenderUsername(transactionRequest));
+                .body(transactionService.getDepositTransactionBySender(transactionRequest));
+    }
+
+    @GetMapping("/allWithDraws")
+    public ResponseEntity<List<TransactionResponse>> getAllWithDraws(@RequestBody TransactionRequest transactionRequest) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(transactionService.getWithDrawTransactionBySender(transactionRequest));
+    }
+
+    @GetMapping("/allTransfers")
+    public ResponseEntity<List<TransactionResponse>> getAllTransfers(@RequestBody TransactionRequest transactionRequest) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(transactionService.getWithDrawTransactionBySender(transactionRequest));
     }
 }
