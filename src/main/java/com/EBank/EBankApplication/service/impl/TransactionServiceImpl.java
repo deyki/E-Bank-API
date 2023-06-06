@@ -139,18 +139,54 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public List<TransactionResponse> getTransactionsByTypeAndSenderUsername(TransactionRequest transactionRequest) {
+    public List<TransactionResponse> getDepositTransactionBySender(TransactionRequest transactionRequest) {
         return transactionRepository
                 .findAll()
                 .stream()
                 .filter(transaction -> transaction.getSender().equals(transactionRequest.username()))
-                .filter(transaction -> transaction.getTransactionType().equals(transactionRequest.transactionType()))
+                .filter(transaction -> transaction.getTransactionType().equals(TransactionType.DEPOSIT))
                 .map(transaction -> new TransactionResponse(
                         transaction.getTransactionType(),
                         transaction.getSender(),
                         transaction.getReceiver(),
                         transaction.getAmount(),
                         transaction.getDate()
-                )).collect(Collectors.toList());
+                ))
+                .collect(Collectors.toList());
+
+    }
+
+    @Override
+    public List<TransactionResponse> getWithDrawTransactionBySender(TransactionRequest transactionRequest) {
+        return transactionRepository
+                .findAll()
+                .stream()
+                .filter(transaction -> transaction.getSender().equals(transactionRequest.username()))
+                .filter(transaction -> transaction.getTransactionType().equals(TransactionType.WITHDRAW))
+                .map(transaction -> new TransactionResponse(
+                        transaction.getTransactionType(),
+                        transaction.getSender(),
+                        transaction.getReceiver(),
+                        transaction.getAmount(),
+                        transaction.getDate()
+                ))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<TransactionResponse> getTransferTransactionBySender(TransactionRequest transactionRequest) {
+        return transactionRepository
+                .findAll()
+                .stream()
+                .filter(transaction -> transaction.getSender().equals(transactionRequest.username()))
+                .filter(transaction -> transaction.getTransactionType().equals(TransactionType.TRANSFER))
+                .map(transaction -> new TransactionResponse(
+                        transaction.getTransactionType(),
+                        transaction.getSender(),
+                        transaction.getReceiver(),
+                        transaction.getAmount(),
+                        transaction.getDate()
+                ))
+                .collect(Collectors.toList());
     }
 }

@@ -17,5 +17,9 @@ public interface TransactionService {
 
     ResponseMessage transfer(TransferRequest transferRequest) throws BankAccountNotFoundException, BankAccountBalanceException, BanException;
 
-    List<TransactionResponse> getTransactionsByTypeAndSenderUsername(TransactionRequest transactionRequest);
+    List<TransactionResponse> getDepositTransactionBySender(TransactionRequest transactionRequest);
+
+    List<TransactionResponse> getWithDrawTransactionBySender(TransactionRequest transactionRequest);
+
+    List<TransactionResponse> getTransferTransactionBySender(TransactionRequest transactionRequest);
 }
