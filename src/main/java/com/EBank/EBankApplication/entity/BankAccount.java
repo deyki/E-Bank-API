@@ -23,7 +23,7 @@ public class BankAccount {
     @Column(name = "balance", nullable = false)
     private Float balance;
 
-    @Column(name = "banned", nullable = false)
+    @Column(name = "banned")
     private Boolean banned;
 
     @OneToOne(mappedBy = "bankAccount")
