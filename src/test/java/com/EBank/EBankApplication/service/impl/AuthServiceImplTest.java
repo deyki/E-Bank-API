@@ -49,18 +49,19 @@ class AuthServiceImplTest {
 
     @Test
     void whenLoadUserByUsername_thenReturnCorrectResult() {
-        Mockito.when(userRepository.findByUsername(this.user.getUsername())).thenReturn(Optional.of(this.user));
+        Mockito.when(userRepository.findByUsername(user.getUsername())).thenReturn(Optional.of(user));
 
-        UserDetails userDetails = authService.loadUserByUsername(this.user.getUsername());
+        UserDetails userDetails = authService.loadUserByUsername(user.getUsername());
 
-        assertEquals(userDetails.getUsername(), this.user.getUsername());
+        assertEquals(userDetails.getUsername(), user.getUsername());
     }
 
     @Test
     void whenSignUp_thenReturnCorrectResult() {
         User newUser = new User();
+        newUser.setUserID(2L);
         newUser.setUsername("User2");
-        newUser.setPassword(bCryptPasswordEncoder.encode("password"));
+        newUser.setPassword("Password");
 
         Mockito.when(userRepository.findByUsername(newUser.getUsername())).thenReturn(Optional.of(newUser));
         Mockito.when(userRepository.save(newUser)).thenReturn(newUser);

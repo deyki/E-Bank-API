@@ -43,7 +43,7 @@ class UserServiceImplTest {
     }
 
     @Test
-    void whenCreateUserProfileDetails_thenReturnCorrectResult() {
+    void whenCreateUserProfileDetails_thenReturnCorrectResult() throws UserNotFoundException {
         UserProfileDetailsRequest request = new UserProfileDetailsRequest(
                 "Nikolay",
                 "Nikolaev",
@@ -60,7 +60,7 @@ class UserServiceImplTest {
         Mockito.when(userRepository.save(user)).thenReturn(user);
         Mockito.when(userProfileDetailsRepository.save(userProfileDetails)).thenReturn(userProfileDetails);
 
-        user.setUserProfileDetails(userProfileDetails);
+        userService.createUserProfileDetails(user.getUserID(), request);
 
         assertEquals(user.getUserProfileDetails().getFirstName(), "Nikolay");
     }
