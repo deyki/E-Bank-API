@@ -2,13 +2,17 @@ package com.EBank.EBankApplication.entity;
 
 import com.EBank.EBankApplication.enums.TransactionType;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
+@Builder
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "transaction")
 public class Transaction {
