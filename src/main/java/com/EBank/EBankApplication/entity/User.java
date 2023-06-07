@@ -1,14 +1,18 @@
 package com.EBank.EBankApplication.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Set;
 
+@Builder
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "app_user")
 public class User implements UserDetails {
