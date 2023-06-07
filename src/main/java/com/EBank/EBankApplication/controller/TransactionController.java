@@ -63,6 +63,6 @@ public class TransactionController {
     public ResponseEntity<List<TransactionResponse>> getAllTransfers(@RequestBody TransactionRequest transactionRequest) {
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(transactionService.getWithDrawTransactionBySender(transactionRequest));
+                .body(transactionService.getTransferTransactionBySender(transactionRequest));
     }
 }
