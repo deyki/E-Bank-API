@@ -1,14 +1,18 @@
 # Tech-stack
 
-* Java 17
+* Java-17
 
-* Spring boot 3.1.0
+* Spring boot-3.1.0
 
-* Spring security
+* Spring security-6
 
 * Spring data jpa
 
 * PostgreSQl
+
+* JUnit-5
+
+* Mockito
 
 # Functionalities
 
