@@ -44,7 +44,6 @@ class AuthControllerTest {
     private ResponseMessage accountCreated;
     private ResponseMessage JWToken;
     private AuthRequest authRequest;
-
     @BeforeEach
     void setUp() {
         this.authRequest = new AuthRequest("User", "Password");
