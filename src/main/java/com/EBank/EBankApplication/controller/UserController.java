@@ -4,7 +4,7 @@ import com.EBank.EBankApplication.error.UserNotFoundException;
 import com.EBank.EBankApplication.model.ResponseMessage;
 import com.EBank.EBankApplication.model.user.UserProfileDetailsRequest;
 import com.EBank.EBankApplication.model.user.UserResponseModel;
-import com.EBank.EBankApplication.service.impl.UserServiceImpl;
+import com.EBank.EBankApplication.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/user")
 public class UserController {
 
-    private final UserServiceImpl userService;
+    private final UserService userService;
 
     @Autowired
-    public UserController(UserServiceImpl userService) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 

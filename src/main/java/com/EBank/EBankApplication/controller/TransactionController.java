@@ -5,7 +5,7 @@ import com.EBank.EBankApplication.error.BankAccountBalanceException;
 import com.EBank.EBankApplication.error.BankAccountNotFoundException;
 import com.EBank.EBankApplication.model.ResponseMessage;
 import com.EBank.EBankApplication.model.transaction.*;
-import com.EBank.EBankApplication.service.impl.TransactionServiceImpl;
+import com.EBank.EBankApplication.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +17,10 @@ import java.util.List;
 @RequestMapping("/api/transaction")
 public class TransactionController {
 
-    private final TransactionServiceImpl transactionService;
+    private final TransactionService transactionService;
 
     @Autowired
-    public TransactionController(TransactionServiceImpl transactionService) {
+    public TransactionController(TransactionService transactionService) {
         this.transactionService = transactionService;
     }
 

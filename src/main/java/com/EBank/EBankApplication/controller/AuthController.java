@@ -4,7 +4,7 @@ import com.EBank.EBankApplication.error.InvalidUserCredentialsException;
 import com.EBank.EBankApplication.error.RoleNotFoundException;
 import com.EBank.EBankApplication.model.AuthRequest;
 import com.EBank.EBankApplication.model.ResponseMessage;
-import com.EBank.EBankApplication.service.impl.AuthServiceImpl;
+import com.EBank.EBankApplication.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/auth")
 public class AuthController {
 
-    private final AuthServiceImpl authService;
+    private final AuthService authService;
 
     @Autowired
-    public AuthController(AuthServiceImpl authService) {
+    public AuthController(AuthService authService) {
         this.authService = authService;
     }
 
