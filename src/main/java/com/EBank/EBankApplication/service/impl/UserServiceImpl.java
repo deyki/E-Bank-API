@@ -18,13 +18,11 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserProfileDetailsRepository userProfileDetailsRepository;
-    private final ModelMapper modelMapper;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, UserProfileDetailsRepository userProfileDetailsRepository, ModelMapper modelMapper) {
+    public UserServiceImpl(UserRepository userRepository, UserProfileDetailsRepository userProfileDetailsRepository) {
         this.userRepository = userRepository;
         this.userProfileDetailsRepository = userProfileDetailsRepository;
-        this.modelMapper = modelMapper;
     }
 
     @Override
