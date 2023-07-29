@@ -14,7 +14,7 @@
 
 * Mockito
 
-# Functionalities
+# Description
 
 * Authentication and authorization. Two roles: admin, user.
 
